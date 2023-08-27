@@ -15,8 +15,10 @@ import Result from "../models/Result";
 import ClientContext from "../contexts/api/ClientContext";
 import { motion } from "framer-motion";
 import { OutletContextType } from "../authentication/models/OutletContextType";
-import { useOutletContext } from "react-router-dom";
+import { Link, useLocation, useOutletContext } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import IResult from "../models/IResult";
+import Swal from "sweetalert2";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     // backgroundColor: "#666",
@@ -44,6 +46,8 @@ export default function MealsTable() {
   const [data, setData] = useState<MealsInformationPage>();
   const context = new ClientContext(outLetProps.error401Handler);
   const [cookies] = useCookies(["jwt"]);
+  const locaiton = useLocation();
+  locaiton.state = { askdj: "sad" };
   let token = cookies.jwt;
   const [pageNumber, setPageNumber] = useState<number>(1);
   function PageChange(selected: number) {
@@ -52,6 +56,32 @@ export default function MealsTable() {
 
     setPageNumber(selected + 1);
   }
+  const handleDelete = (id: number) => {
+    Swal.fire({
+      title: "هل متأكد من حذف الوجبة من النظام؟",
+      showCancelButton: true,
+      cancelButtonText: "إلغاء الطلب",
+      confirmButtonText: "المتابعة",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        context
+          .delete<IResult>("api/Meals/DeleteMealInformation/" + id, token)
+          .then((response) => {
+            console.log(response.data);
+            if (data) {
+              let newdata: MealsInformationPage = {
+                count: data?.count - 1,
+                mealsInformation: data?.mealsInformation.filter(
+                  (item) => item.id != id
+                ),
+              };
+              setData(newdata);
+            }
+          });
+      }
+    });
+  };
+
   useEffect(() => {
     context
       .get<Result<MealsInformationPage>>(
@@ -92,6 +122,9 @@ export default function MealsTable() {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell align="center">
+                      <div className="header-table-title">عمليات</div>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
                       <div className="header-table-title">الوصف</div>
                     </StyledTableCell>
                     <StyledTableCell align="center">
@@ -113,6 +146,25 @@ export default function MealsTable() {
                 <TableBody>
                   {data.mealsInformation.map((row) => (
                     <StyledTableRow key={row.id}>
+                      <StyledTableCell align="center">
+                        <div
+                          className="cancel btn me-2 scale-smaller delete-color"
+                          onClick={() => {
+                            handleDelete(row.id);
+                          }}
+                        >
+                          حذف
+                        </div>
+
+                        <Link
+                          to={{
+                            pathname: "/EditMeal/" + row.id.toString(),
+                          }}
+                          className="btn cancel update-color scale-smaller"
+                        >
+                          تعديل
+                        </Link>
+                      </StyledTableCell>
                       <StyledTableCell align="center">
                         {row.description}
                       </StyledTableCell>

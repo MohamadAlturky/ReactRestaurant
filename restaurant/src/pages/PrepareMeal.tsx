@@ -22,6 +22,8 @@ import { motion } from "framer-motion";
 import add from "../assets/plus.svg";
 import { PrepareMealForm } from "../components/prepareMealForm/PrepareMealForm";
 import MealChartCustomersReservations from "../components/charts/MealChartCustomersReservations";
+import Swal from "sweetalert2";
+import IResult from "../models/IResult";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -84,6 +86,24 @@ export default function PrepareMeal() {
     window.sessionStorage.setItem("choise", id.toString());
     setChoise(id);
   };
+
+  const handleDelete = (id: number) => {
+    Swal.fire({
+      title: "هل متأكد من حذف الوجبة من النظام؟",
+      showCancelButton: true,
+      cancelButtonText: "إلغاء الطلب",
+      confirmButtonText: "المتابعة",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        context
+          .delete<IResult>("api/Meals/DeleteMealEntry/" + id, token)
+          .then((response) => {
+            console.log(response.data);
+          });
+      }
+    });
+  };
+
   useEffect(() => {
     if (date != null) {
       let month: number = 0;
@@ -135,6 +155,8 @@ export default function PrepareMeal() {
       </>
     );
   }
+  let token = cookies.jwt;
+
   return (
     <>
       {!date && <PrepareMealDatePicker passSelectedDate={getSelectedDate} />}
@@ -218,9 +240,7 @@ export default function PrepareMeal() {
                       <TableHead>
                         <TableRow>
                           <StyledTableCell align="center">
-                            <div className="header-table-title">
-                              استعراض احصائيات
-                            </div>
+                            <div className="header-table-title">عمليات</div>
                           </StyledTableCell>
                           <StyledTableCell align="center">
                             <div className="header-table-title">
@@ -248,12 +268,20 @@ export default function PrepareMeal() {
                           <StyledTableRow key={row.id}>
                             <StyledTableCell align="center">
                               <div
-                                className="cancel"
+                                className="cancel btn me-2 scale-smaller"
                                 onClick={() => {
                                   setMealStatistic(row.id);
                                 }}
                               >
-                                الذهاب
+                                إحصائيات
+                              </div>
+                              <div
+                                className="cancel btn me-2 scale-smaller delete-color"
+                                onClick={() => {
+                                  handleDelete(row.id);
+                                }}
+                              >
+                                حذف
                               </div>
                             </StyledTableCell>
                             <StyledTableCell align="center">

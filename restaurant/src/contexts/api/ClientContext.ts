@@ -56,7 +56,7 @@ class ClientContext {
           Swal.fire({
             title: "خطأ",
             text: error.response?.data.error.message,
-            icon: "warning",
+            icon: "error",
             confirmButtonText: "حسناً",
           });
           return Promise.reject(error);
@@ -82,6 +82,20 @@ class ClientContext {
     Swal.showLoading();
     let requestUrl: string = this.apiServerURL + url;
     return this.axiosInstance.post<T>(requestUrl, data, {
+      headers: {
+        "Content-Type": contentType,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  public async delete<T>(
+    url: string,
+    token: string,
+    contentType: string = "application/json"
+  ): Promise<AxiosResponse<T>> {
+    Swal.showLoading();
+    let requestUrl: string = this.apiServerURL + url;
+    return this.axiosInstance.delete<T>(requestUrl, {
       headers: {
         "Content-Type": contentType,
         Authorization: `Bearer ${token}`,

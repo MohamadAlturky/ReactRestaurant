@@ -5,11 +5,13 @@ import "./navbar.css";
 import { useMediaQuery } from "@mui/material";
 import { useContext } from "react";
 import { ResourceContext } from "../../contexts/resource/ResourceContext";
+import { Link, useNavigate } from "react-router-dom";
 interface NavBarProps {
   styles: string;
   backgroundStyle: string;
 }
 function NavBar(props: NavBarProps) {
+  const navigate = useNavigate();
   const resources = useContext(ResourceContext);
   const isSmallScreen = useMediaQuery("(max-width: 360px)");
   let classes =
@@ -30,10 +32,18 @@ function NavBar(props: NavBarProps) {
               </a>
 
               <div className="ms-auto large-content">
-                <span className=" item">
-                  <a className="nav-link" href="/">
+                <span className="item">
+                  <Link to={"/CallUs"} className="nav-link">
                     {resources.NavBar.callUs}
-                  </a>
+                  </Link>
+                  {/* <a
+                    className="nav-link"
+                    onClick={() => {
+                      navigate("/CallUs");
+                    }}
+                  >
+                    {resources.NavBar.callUs}
+                  </a> */}
                 </span>
                 <span className=" item">
                   <a className="nav-link" href="/">
@@ -87,7 +97,12 @@ function NavBar(props: NavBarProps) {
                     <a className="nav-link ms-auto" href="/">
                       {resources.NavBar.mainPageLink}
                     </a>
-                    <a className="nav-link ms-auto" href="/">
+                    <a
+                      className="nav-link ms-auto"
+                      onClick={() => {
+                        navigate("/CallUs");
+                      }}
+                    >
                       {resources.NavBar.callUs}
                     </a>
                     <a className="nav-link ms-auto" href="/">

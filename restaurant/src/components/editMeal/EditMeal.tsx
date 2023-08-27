@@ -1,16 +1,18 @@
-import "./file.css";
-import "./createMeal.css";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import IResult from "../../models/IResult";
-import fileIcon from "../../assets/file.svg";
 import { useOutletContext } from "react-router-dom";
 import ClientContext from "../../contexts/api/ClientContext";
 import { OutletContextType } from "../../authentication/models/OutletContextType";
+import { useParams } from "react-router-dom";
 
-function CreateMeal() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+export default function EditMeal() {
+  let { id } = useParams();
+  console.log("idd", id);
+
+  const [Id] = useState<string | null>(id ? id?.toString() : null);
+
   const [name, setName] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [numberOfCalories, setNumberOfCalories] = useState<number | null>(null);
@@ -19,19 +21,19 @@ function CreateMeal() {
   const { outLetProps } = useOutletContext<OutletContextType>();
   const clientContext = new ClientContext(outLetProps.error401Handler);
 
-  console.log(name);
-  console.log(selectedFile);
-  console.log(description);
-  console.log(mealType);
-  console.log(numberOfCalories);
+  console.log("name", name);
+  console.log("description", description);
+  console.log("mealType", mealType);
+  console.log("numberOfCalories", numberOfCalories);
+  console.log("id", Id);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (
       numberOfCalories &&
       description &&
-      selectedFile &&
       name &&
+      Id &&
       name != "" &&
       numberOfCalories > 0 &&
       description != ""
@@ -40,12 +42,12 @@ function CreateMeal() {
       formData.append("name", name);
       formData.append("description", description);
       formData.append("numberOfCalories", numberOfCalories.toString());
-      formData.append("imageFile", selectedFile);
       formData.append("type", mealType);
+      formData.append("id", Id);
       let token = cookies.jwt;
       clientContext
-        .post<IResult>(
-          "api/Meals/Create",
+        .put<IResult>(
+          "api/Meals/Update",
           token,
           formData,
           "multipart/form-data"
@@ -55,7 +57,7 @@ function CreateMeal() {
             title: "صح",
             text: response.status.toString(),
             icon: "success",
-            confirmButtonText: "حسنن",
+            confirmButtonText: "حسناً",
           });
         });
     } else {
@@ -67,11 +69,6 @@ function CreateMeal() {
       });
     }
   }
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
-    }
-  };
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
@@ -90,6 +87,7 @@ function CreateMeal() {
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setMealType(event.target.value);
   };
+  console.log(id);
   return (
     <>
       <form
@@ -97,7 +95,7 @@ function CreateMeal() {
         className="d-flex justify-content-center mt-5"
       >
         <div className="create-meal-form">
-          <div className="create-meal-label">إضافة وجبة جديدة</div>
+          <div className="create-meal-label">تعديل معلومات الوجبة</div>
           <div className="input-container-on-meal-form">
             <input
               className="create-meal-input"
@@ -146,29 +144,12 @@ function CreateMeal() {
               <option value="BreakFast">فطور</option>
             </select>
           </div>
-          <div className="input-container-on-meal-form">
-            <label className="custum-file-upload" htmlFor="file">
-              <div className="icon">
-                <img className="file-image" src={fileIcon} alt="" />
-              </div>
-              <div className="text">
-                <span>انقر لإضافة صورة للوجبة</span>
-              </div>
-              <input
-                className="d-none"
-                type="file"
-                id="file"
-                onChange={handleFileChange}
-              />
-            </label>
-          </div>
 
           <button type="submit" className="submit-create-meal">
-            <p> حفظ الوجبة</p>
+            <p>تعديل</p>
           </button>
         </div>
       </form>
     </>
   );
 }
-export default CreateMeal;

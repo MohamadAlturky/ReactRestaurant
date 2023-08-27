@@ -28,6 +28,8 @@ import ReservationsStatus from "./components/reservationsStatus/ReservationsStat
 import Profile from "./components/profile/Profile";
 import PricingPage from "./pages/PricingPage";
 import FindCustomer from "./components/findCustomer/FindCustomer";
+import CallUs from "./pages/CallUs";
+import EditMeal from "./components/editMeal/EditMeal";
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
           <Routes>
             <Route key={1} path="/login" element={<LogInPage />} />
             <Route key={3} path="/" element={<Welcome />} />
+            <Route key={3} path="/CallUs" element={<CallUs />} />
             <Route
               key={4}
               path="/ForgetPassword"
@@ -109,7 +112,17 @@ function App() {
             >
               <Route key={12} path="/Register" element={<Register />} />
             </Route>
-
+            <Route
+              key={11}
+              element={
+                <Requirement
+                  activeLink={1}
+                  permission={data.permissions.CreateSystemInformation}
+                />
+              }
+            >
+              <Route key={12} path="/EditMeal/:id" element={<EditMeal />} />
+            </Route>
             <Route
               key={11}
               element={

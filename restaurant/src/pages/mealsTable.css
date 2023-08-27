@@ -9,6 +9,26 @@
     font-weight: bold;
 }
 
+.scale-smaller {
+    transform: scale(90%);
+}
+
+.delete-color {
+    background: #dc3545 !important;
+}
+
+.delete-color:hover {
+    color: #fff !important;
+}
+
+.update-color {
+    background: #5BA50E !important;
+}
+
+.update-color:hover {
+    color: #fff !important;
+}
+
 /* 
 .button-for-create {
     padding: 10px 25px;

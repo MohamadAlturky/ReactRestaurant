@@ -82,11 +82,11 @@
     cursor: pointer;
     user-select: none;
     margin-right: 20px;
-    transition: all 0.4s;
+    transition: all 0.2s;
 }
 
 .log-option:hover {
-    transform: scale(102%);
+    transform: scale(101%);
     background: #FFF;
     color: #E4801E;
 }
@@ -105,11 +105,11 @@
     font-weight: 400;
     line-height: normal;
     cursor: pointer;
-    transition: all 0.4s;
+    transition: all 0.2s;
 }
 
 .food-schedule:hover {
-    transform: scale(102%);
+    transform: scale(101%);
     background-color: #FFF;
     color: black;
 }
