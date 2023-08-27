@@ -185,10 +185,16 @@
             "colorClass": "orange-background"
         },
         {
-            "title": "تغذية رصيد زبون",
+            "title": "💳تغذية رصيد زبون",
             "link": "/IncreaseCustomerBalance",
             "descritption": "من خلال هذه الخدمة يمكنك تغذية رصيد زبائن مطعم المعهد العالي",
             "colorClass": "green-background"
+        },
+        {
+            "title": "📋معلومات الزبائن",
+            "link": "/FindCustomer",
+            "descritption": "من خلال هذه الخدمة يمكنك استعراض معلومات زبون معين ",
+            "colorClass": "light-blue-background"
         }
     ],
     "Transactions": [

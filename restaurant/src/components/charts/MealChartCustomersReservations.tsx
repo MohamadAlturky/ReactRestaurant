@@ -50,7 +50,6 @@ export default function MealChartCustomersReservations(props: MealChartProps) {
       setNormalizedData(arr);
     }
   }, [data]);
-
   useEffect(() => {
     context
       .get<Result<ReservationsCustomerTypeReadModel[]>>(
@@ -67,6 +66,25 @@ export default function MealChartCustomersReservations(props: MealChartProps) {
   }, []);
   console.log("normalizedData");
   console.log(normalizedData);
+
+  function findType(customerCategory: string) {
+    let type = resources.CustomersTypes.find(
+      (type) => type.id == customerCategory
+    )?.name;
+    if (type != undefined) {
+      return type;
+    } else {
+      return "";
+    }
+  }
+  function findStatus(status: string) {
+    let type = resources.styles.find((type) => type.id == status)?.message;
+    if (type != undefined) {
+      return type;
+    } else {
+      return "";
+    }
+  }
   function HandleGenerateExcel() {
     context
       .get<Result<ReservationsReadModel>>(
@@ -77,7 +95,18 @@ export default function MealChartCustomersReservations(props: MealChartProps) {
         console.log("response");
         console.log(response.data.value);
         setMealInfo(response.data.value.mealReadModel);
-        setCsvData(response.data.value.records);
+        let normalizedReservations: ReservationRecord[] = [];
+        response.data.value.records.map((record) =>
+          normalizedReservations.push({
+            id: record.id,
+            serialNumber: record.serialNumber,
+            customerName: record.customerName,
+            customerCategory: findType(record.customerCategory),
+            status: findStatus(record.status),
+          })
+        );
+
+        setCsvData(normalizedReservations);
       });
   }
   const headers = [

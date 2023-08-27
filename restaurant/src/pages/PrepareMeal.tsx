@@ -248,7 +248,7 @@ export default function PrepareMeal() {
                           <StyledTableRow key={row.id}>
                             <StyledTableCell align="center">
                               <div
-                                className="btn"
+                                className="cancel"
                                 onClick={() => {
                                   setMealStatistic(row.id);
                                 }}

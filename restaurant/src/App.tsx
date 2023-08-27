@@ -22,12 +22,12 @@ import ConsumeReservations from "./components/consumeReservations/ConsumeReserva
 import FourOFour from "./pages/FourOFour";
 import ForgetPassword from "./components/forgetPassword/ForgetPassword";
 import AdminServices from "./components/adminServices/AdminServices";
-import Csv from "./components/csv/Csv";
 import AccountTransactionsPage from "./components/accountTransactions/AccountTransactionsPage";
 import MealSchedule from "./components/mealSchedule/MealSchedule";
 import ReservationsStatus from "./components/reservationsStatus/ReservationsStatus";
 import Profile from "./components/profile/Profile";
 import PricingPage from "./pages/PricingPage";
+import FindCustomer from "./components/findCustomer/FindCustomer";
 
 function App() {
   return (
@@ -36,7 +36,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route key={1} path="/login" element={<LogInPage />} />
-            {/* <Route key={2} path="/Csv" element={<Csv />} /> */}
             <Route key={3} path="/" element={<Welcome />} />
             <Route
               key={4}
@@ -137,6 +136,22 @@ function App() {
                 element={<MealChartCustomersReservations mealId={2} />}
               /> */}
               <Route key={14} path="/MealsTable" element={<MealsTable />} />
+            </Route>
+
+            <Route
+              key={13}
+              element={
+                <Requirement
+                  activeLink={1}
+                  permission={data.permissions.ReadSystemInformation}
+                />
+              }
+            >
+              {/* <Route key={1}
+                path="/MealChartCustomersReservations"
+                element={<MealChartCustomersReservations mealId={2} />}
+              /> */}
+              <Route key={14} path="/FindCustomer" element={<FindCustomer />} />
             </Route>
 
             <Route
