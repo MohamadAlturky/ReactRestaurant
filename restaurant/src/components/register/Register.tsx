@@ -81,7 +81,7 @@ function Register() {
       formData.append("password", password);
       formData.append("hiastMail", mail);
       formData.append("serialNumber", serialNumber);
-      formData.append("description", description);
+      formData.append("notes", description);
       formData.append("lastName", lastName);
       formData.append("category", customerType);
       formData.append("firstName", firstName);
@@ -189,56 +189,7 @@ function Register() {
               onChange={handlePasswordChange}
             />
           </div>
-          {/* 
-          <div className="input-container-on-meal-form">
-            <input
-              className="create-meal-input"
-              type="password"
-              placeholder="تأكيد كلمة المرور"
-              dir="rtl"
-              onChange={handleConfirmPasswordChange}
-            />
-          </div> */}
 
-          {/* <div className="input-container-on-meal-form d-flex justify-content-center role-title">
-            دور المستخدم في النظام
-          </div>
-
-          <div className="input-container-on-meal-form">
-            <select
-              className="form-select select-meal-type"
-              aria-label="Default select example"
-              dir="rtl"
-              value={role}
-              onChange={handleRolesSelection}
-            >
-              {data.roles.map((role) => (
-                <option key={role.Id} value={role.Id}>
-                  {role.Name}
-                </option>
-              ))}
-            </select>
-          </div> */}
-          {/* {role} */}
-
-          {/* <div className="input-container-on-meal-form">
-              <div className="row">
-                {selectedRoles.map((role) => (
-                  <div className="col-4" key={role}>
-                    <div className="role-item" key={role}>
-                      <div
-                        className="dispose-role"
-                        key={role}
-                        onClick={() => handleDispose(role)}
-                      >
-                        X
-                      </div>
-                      {data.roles.find((e) => e.Id == parseInt(role))?.Name}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div> */}
           <div className="input-container-on-meal-form">
             <input
               className="create-meal-input"
@@ -253,7 +204,6 @@ function Register() {
             <p>حفظ المستخدم الجديد</p>
           </button>
         </form>
-        {/* </form> */}
       </div>
     </div>
   );
