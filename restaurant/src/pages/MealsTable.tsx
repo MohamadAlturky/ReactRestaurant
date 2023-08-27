@@ -13,10 +13,10 @@ import mealTypes from "../configurations/mealTypes.json";
 import { useEffect, useState } from "react";
 import Result from "../models/Result";
 import ClientContext from "../contexts/api/ClientContext";
-import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { OutletContextType } from "../authentication/models/OutletContextType";
 import { useOutletContext } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     // backgroundColor: "#666",
@@ -41,98 +41,121 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function MealsTable() {
   const { outLetProps } = useOutletContext<OutletContextType>();
-  const [data, setData] = useState<Meal[]>();
+  const [data, setData] = useState<MealsInformationPage>();
   const context = new ClientContext(outLetProps.error401Handler);
   const [cookies] = useCookies(["jwt"]);
   let token = cookies.jwt;
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  function PageChange(selected: number) {
+    console.log("selected");
+    console.log(selected);
 
+    setPageNumber(selected + 1);
+  }
   useEffect(() => {
     context
-      .get<Result<Meal[]>>("api/Meals/GetAllMeals", token)
+      .get<Result<MealsInformationPage>>(
+        "api/Meals/GetMealsPage/" + pageNumber,
+        token
+      )
       .then((response) => {
         setData(response.data.value);
         console.log(response.data);
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "خطأ",
-          text: error.status.toString(),
-          icon: "warning",
-          confirmButtonText: "حسنن",
-        });
       });
-  }, []);
+  }, [pageNumber]);
 
-  let lengthOfData: number = 0;
-  if (data != null) {
-    lengthOfData = data.length;
-  }
   return (
-    <div className="container mt-5">
-      {/* {!data && <Loader />} */}
-      {data && (
-        <motion.div
-          initial={{ height: 0 }}
-          animate={{ height: "expanded" ? "auto" : 0 }}
-          transition={{ duration: lengthOfData / 4, ease: "easeInOut" }}
-          style={{
-            overflow: "hidden",
-            border: "1px solid #ccc",
-          }}
-        >
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell align="center">
-                    <div className="header-table-title">الوصف</div>
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <div className="header-table-title">
-                      عدد السعرات الحرارية
-                    </div>
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <div className="header-table-title">نوع الوجبة</div>
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <div className="header-table-title">اسم الوجبة</div>
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <div className="header-table-title">الصورة</div>
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data?.map((row) => (
-                  <StyledTableRow key={row.id}>
+    <>
+      {!data ||
+        (data.mealsInformation.length == 0 && (
+          <div className="d-flex justify-content-center">
+            لا يوجد معلومات متاحة حالياً حاول لاحقاً
+          </div>
+        ))}
+      {data && data.mealsInformation.length != 0 && (
+        <>
+          <motion.div
+            initial={{ height: 0 }}
+            animate={{ height: "expanded" ? "auto" : 0 }}
+            transition={{
+              duration: data.mealsInformation.length / 8,
+              ease: "easeInOut",
+            }}
+            className="mt-5"
+            style={{
+              overflow: "hidden",
+              border: "1px solid #ccc",
+            }}
+          >
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
                     <StyledTableCell align="center">
-                      {row.description}
+                      <div className="header-table-title">الوصف</div>
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.numberOfCalories}
+                      <div className="header-table-title">
+                        عدد السعرات الحرارية
+                      </div>
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {
-                        mealTypes.types.find((type) => type.id == row.type)
-                          ?.value
-                      }
+                      <div className="header-table-title">نوع الوجبة</div>
                     </StyledTableCell>
-                    <StyledTableCell align="center">{row.name}</StyledTableCell>
-                    <StyledTableCell component="th" scope="row" align="center">
-                      <img
-                        className="img-in-table"
-                        src={url.baseUrl + row.imagePath}
-                        alt=""
-                      />
+                    <StyledTableCell align="center">
+                      <div className="header-table-title">اسم الوجبة</div>
                     </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </motion.div>
+                    <StyledTableCell align="center">
+                      <div className="header-table-title">الصورة</div>
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data.mealsInformation.map((row) => (
+                    <StyledTableRow key={row.id}>
+                      <StyledTableCell align="center">
+                        {row.description}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.numberOfCalories}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {
+                          mealTypes.types.find((type) => type.id == row.type)
+                            ?.value
+                        }
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        align="center"
+                      >
+                        <img
+                          className="img-in-table"
+                          src={url.baseUrl + row.imagePath}
+                          alt=""
+                        />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </motion.div>
+          <ReactPaginate
+            previousLabel={"السابق"}
+            nextLabel={"التالي"}
+            pageCount={data.count / 10}
+            onPageChange={({ selected }) => PageChange(selected)}
+            containerClassName="d-flex container-for-pagination"
+            disabledClassName="disabled-for-pagination"
+            activeClassName="active-for-pagination"
+          ></ReactPaginate>
+        </>
       )}
-    </div>
+    </>
   );
 }

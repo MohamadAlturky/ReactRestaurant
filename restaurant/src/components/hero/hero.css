@@ -86,7 +86,9 @@
 }
 
 .log-option:hover {
-    transform: scale(110%);
+    transform: scale(102%);
+    background: #FFF;
+    color: #E4801E;
 }
 
 .food-schedule {
@@ -107,7 +109,9 @@
 }
 
 .food-schedule:hover {
-    transform: scale(110%);
+    transform: scale(102%);
+    background-color: #FFF;
+    color: black;
 }
 
 /* .menu-btn:checked~.notes {

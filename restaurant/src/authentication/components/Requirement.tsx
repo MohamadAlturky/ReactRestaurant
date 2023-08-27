@@ -97,14 +97,11 @@ function Requirement(props: RequirementProps) {
 
       if (permissions.includes(data.permissions.CreateSystemInformation)) {
         setUserType("Admin");
-      }
-      if (permissions.includes(data.permissions.ConsumeReservations)) {
+      } else if (permissions.includes(data.permissions.ConsumeReservations)) {
         setUserType("ReservationConsumer");
-      }
-      if (permissions.includes(data.permissions.EditBalances)) {
+      } else if (permissions.includes(data.permissions.EditBalances)) {
         setUserType("Accountant");
-      }
-      if (permissions.includes(data.permissions.ReadContent)) {
+      } else if (permissions.includes(data.permissions.ReadContent)) {
         setUserType("Customer");
       }
     }

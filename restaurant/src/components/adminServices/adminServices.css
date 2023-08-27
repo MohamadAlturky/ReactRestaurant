@@ -89,3 +89,7 @@
     outline: 2px solid transparent;
     outline-offset: 2px;
 }
+
+.green-background {
+    background: #198754;
+}

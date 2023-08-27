@@ -183,6 +183,12 @@
             "link": "/editPricing",
             "descritption": "من خلال هذه الخدمة يمكنك تعديل أسعار الوجبات المقدمة بأنواعها المختلفة",
             "colorClass": "orange-background"
+        },
+        {
+            "title": "تغذية رصيد زبون",
+            "link": "/IncreaseCustomerBalance",
+            "descritption": "من خلال هذه الخدمة يمكنك تغذية رصيد زبائن مطعم المعهد العالي",
+            "colorClass": "green-background"
         }
     ],
     "Transactions": [

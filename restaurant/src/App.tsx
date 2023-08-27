@@ -36,7 +36,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route key={1} path="/login" element={<LogInPage />} />
-            <Route key={2} path="/Csv" element={<Csv />} />
+            {/* <Route key={2} path="/Csv" element={<Csv />} /> */}
             <Route key={3} path="/" element={<Welcome />} />
             <Route
               key={4}
@@ -151,6 +151,22 @@ function App() {
               <Route
                 key={16}
                 path="/IncreaseCustomersBalance"
+                element={<IncreaseCustomersBalance />}
+              />
+            </Route>
+
+            <Route
+              key={15}
+              element={
+                <Requirement
+                  activeLink={1}
+                  permission={data.permissions.EditBalances}
+                />
+              }
+            >
+              <Route
+                key={16}
+                path="/IncreaseCustomerBalance"
                 element={<IncreaseCustomersBalance />}
               />
             </Route>

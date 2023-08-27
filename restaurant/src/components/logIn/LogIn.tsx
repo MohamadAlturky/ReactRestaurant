@@ -119,12 +119,13 @@ function LogIn() {
     if (permissions.includes(data.permissions.ConsumeReservations)) {
       return <Navigate to={"/ConsumeReservations"}></Navigate>;
     }
-    if (permissions.includes(data.permissions.EditBalances)) {
-      return <Navigate to={"/IncreaseCustomersBalance"}></Navigate>;
-    }
     if (permissions.includes(data.permissions.CreateSystemInformation)) {
       return <Navigate to={"/AdminServices"}></Navigate>;
     }
+    if (permissions.includes(data.permissions.EditBalances)) {
+      return <Navigate to={"/IncreaseCustomersBalance"}></Navigate>;
+    }
+
     return <Navigate to={"/Home"}></Navigate>;
   }
 
