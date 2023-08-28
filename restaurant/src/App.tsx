@@ -30,6 +30,7 @@ import PricingPage from "./pages/PricingPage";
 import FindCustomer from "./components/findCustomer/FindCustomer";
 import CallUs from "./pages/CallUs";
 import EditMeal from "./components/editMeal/EditMeal";
+import CustomersTable from "./components/customersTable/CustomersTable";
 
 function App() {
   return (
@@ -111,6 +112,22 @@ function App() {
               }
             >
               <Route key={12} path="/Register" element={<Register />} />
+            </Route>
+
+            <Route
+              key={11}
+              element={
+                <Requirement
+                  activeLink={0}
+                  permission={data.permissions.ReadSystemInformation}
+                />
+              }
+            >
+              <Route
+                key={12}
+                path="/CustomersTable"
+                element={<CustomersTable />}
+              />
             </Route>
             <Route
               key={11}

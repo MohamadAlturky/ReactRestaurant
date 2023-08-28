@@ -25,7 +25,6 @@ function Options(props: OptionsProps) {
       <div className="container">
         <div className="row position-relative  options-bar p-0 mt-5">
           <div className="helpers">
-            {/* <div className="balance">حسابك الجاري: 1200</div> */}
             <div className="notification">
               <img
                 src={notification}

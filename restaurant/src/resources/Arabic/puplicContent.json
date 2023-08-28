@@ -195,6 +195,12 @@
             "link": "/FindCustomer",
             "descritption": "من خلال هذه الخدمة يمكنك استعراض معلومات زبون معين ",
             "colorClass": "light-blue-background"
+        },
+        {
+            "title": "عرض جميع الزبائن",
+            "link": "/CustomersTable",
+            "descritption": "من خلال هذه الخدمة يمكنك استعراض جميع الزبائن ضمن النظام ",
+            "colorClass": "customer-background"
         }
     ],
     "Transactions": [

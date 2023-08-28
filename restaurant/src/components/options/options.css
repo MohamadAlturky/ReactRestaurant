@@ -173,3 +173,7 @@
     border-radius: 8px; */
     text-decoration: underline;
 }
+
+.customer-background {
+    background: #1d3d05;
+}
