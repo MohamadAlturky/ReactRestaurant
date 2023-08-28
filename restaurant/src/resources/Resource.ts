@@ -24,6 +24,7 @@ interface Resource {
   AccountantOptionsBar: Links[];
   CustomersTypes: CustomerTranslatableType[];
   AdminServices: AdminService[];
+  UserServices: AdminService[];
   Transactions: TranslatableTransactionType[];
   Days: EnglishDaysTranslator[];
 }

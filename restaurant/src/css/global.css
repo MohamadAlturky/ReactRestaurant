@@ -6,3 +6,7 @@ body {
     display: block !important;
     background: #EFEFEF !important;
 }
+
+.active-link {
+    font-weight: bold !important;
+}

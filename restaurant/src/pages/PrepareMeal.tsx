@@ -103,6 +103,22 @@ export default function PrepareMeal() {
       }
     });
   };
+  const handleConsume = (id: number, name: string) => {
+    Swal.fire({
+      title: "هل متأكد من استهلاك جميع حجوزات الوجبة " + name + "؟",
+      showCancelButton: true,
+      cancelButtonText: "إلغاء الطلب",
+      confirmButtonText: "المتابعة",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // context
+        //   .put<IResult>("api//", token,)
+        //   .then((response) => {
+        //     console.log(response.data);
+        //   });
+      }
+    });
+  };
 
   useEffect(() => {
     if (date != null) {
@@ -266,9 +282,17 @@ export default function PrepareMeal() {
                       <TableBody>
                         {meals?.map((row) => (
                           <StyledTableRow key={row.id}>
-                            <StyledTableCell align="center">
+                            <StyledTableCell className="d-flex flex-column">
                               <div
                                 className="cancel btn me-2 scale-smaller"
+                                onClick={() => {
+                                  handleConsume(row.id, row.meal.name);
+                                }}
+                              >
+                                استهلاك كل الوجبات
+                              </div>
+                              <div
+                                className="cancel btn me-2 update-color scale-smaller"
                                 onClick={() => {
                                   setMealStatistic(row.id);
                                 }}

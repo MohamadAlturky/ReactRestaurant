@@ -90,6 +90,9 @@ export default function AccountTransactionsPage() {
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
+                    {/* <StyledTableCell align="center">
+                      <div className="header-table-title">رقم المنفذ</div>
+                    </StyledTableCell> */}
                     <StyledTableCell align="center">
                       <div className="header-table-title">التاريخ</div>
                     </StyledTableCell>
@@ -104,6 +107,7 @@ export default function AccountTransactionsPage() {
                 <TableBody>
                   {data?.accountTransactions.map((row, ind) => (
                     <StyledTableRow key={ind}>
+                      {/* <StyledTableCell align="center">{row.by}</StyledTableCell> */}
                       <StyledTableCell align="center">
                         {resources.Days.find(
                           (day) => day.id == row.createdAtDay

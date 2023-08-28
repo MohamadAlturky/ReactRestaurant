@@ -17,7 +17,7 @@ import PrepareMeal from "./pages/PrepareMeal";
 import { IncreaseCustomersBalance } from "./components/IncreaseCustomersBalance/IncreaceCustomersBalance";
 import ChangePassword from "./components/changePassword/ChangePassword";
 import SendMessage from "./components/sendMessage/SendMessage";
-import NotificationReciever from "./components/Notifications/NotificationReciever";
+import NotificationReciever from "./components/notifications/NotificationReciever";
 import ConsumeReservations from "./components/consumeReservations/ConsumeReservations";
 import FourOFour from "./pages/FourOFour";
 import ForgetPassword from "./components/forgetPassword/ForgetPassword";
@@ -31,6 +31,7 @@ import FindCustomer from "./components/findCustomer/FindCustomer";
 import CallUs from "./pages/CallUs";
 import EditMeal from "./components/editMeal/EditMeal";
 import CustomersTable from "./components/customersTable/CustomersTable";
+import UserServices from "./components/userServices/UserServices";
 
 function App() {
   return (
@@ -247,6 +248,18 @@ function App() {
                 element={<AdminServices />}
               />
             </Route>
+
+            <Route
+              key={19}
+              element={
+                <Requirement
+                  activeLink={0}
+                  permission={data.permissions.ReadContent}
+                />
+              }
+            >
+              <Route key={21} path="/UserServices" element={<UserServices />} />
+            </Route>
             <Route
               key={19}
               element={
@@ -261,7 +274,7 @@ function App() {
             <Route
               element={
                 <Requirement
-                  activeLink={3}
+                  activeLink={0}
                   permission={data.permissions.CreateSystemInformation}
                 />
               }

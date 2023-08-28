@@ -97,8 +97,8 @@
             "name": "جدول الطعام"
         },
         {
-            "link": "/editPricing",
-            "name": "تعديل الأسعار"
+            "link": "/MealSchedule",
+            "name": "استعراض برنامج الطعام"
         },
         {
             "link": "/Register",
@@ -107,7 +107,7 @@
     ],
     "UserOptionsBar": [
         {
-            "link": "/changePassword",
+            "link": "/userServices",
             "name": "خدمات أخرى"
         },
         {
@@ -201,6 +201,14 @@
             "link": "/CustomersTable",
             "descritption": "من خلال هذه الخدمة يمكنك استعراض جميع الزبائن ضمن النظام ",
             "colorClass": "customer-background"
+        }
+    ],
+    "UserServices": [
+        {
+            "title": "💰عرض الأسعار",
+            "link": "/PricingPage",
+            "descritption": "من خلال هذه الخدمة يمكنك استعراض أسعار الوجبات المقدمة الخاص بك",
+            "colorClass": "orange-background"
         }
     ],
     "Transactions": [

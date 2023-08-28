@@ -22,8 +22,8 @@ function Hero() {
           <div className="filter"></div>
           <NavBar styles="top-nav-container" backgroundStyle=""></NavBar>
           <div className="notes">
-            <div className="top-note">لقمة هنية بتكفي مية</div>
-            <div className="down-note">كيف لو كانت من عننا</div>
+            <div className="top-note">عطي الخباز خبزو </div>
+            <div className="down-note">..لو أكل نصوو</div>
             <div className="down-option">
               <div className="log-option" onClick={handleLogIn}>
                 تسجيل الدخول

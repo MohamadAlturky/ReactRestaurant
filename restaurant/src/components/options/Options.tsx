@@ -1,10 +1,10 @@
 import "./options.css";
 import "./toggler.css";
 import userIcon from "./../../assets/person-2.svg";
-import notification from "./../../assets/plate.svg";
 import { ResourceContext } from "../../contexts/resource/ResourceContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import NotificationIcon from "../notificationIcon/NotificationIcon";
 interface OptionsProps {
   type: "Admin" | "Customer" | "Accountant" | "ReservationConsumer";
   itemNumber: number;
@@ -25,14 +25,8 @@ function Options(props: OptionsProps) {
       <div className="container">
         <div className="row position-relative  options-bar p-0 mt-5">
           <div className="helpers">
-            <div className="notification">
-              <img
-                src={notification}
-                alt=""
-                onClick={() => {
-                  navigate("/NotificationReciever");
-                }}
-              />
+            <div>
+              <NotificationIcon></NotificationIcon>
             </div>
             <div className="notification">
               {/* <p>اسم المستخدم</p> */}

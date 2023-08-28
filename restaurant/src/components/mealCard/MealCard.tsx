@@ -1,8 +1,6 @@
 import serverUrl from "../../configurations/apiConfiguration.json";
 import "./mealCard.css";
 import { useContext, useEffect, useState } from "react";
-import plus from "../../assets/plus.svg";
-import minus from "../../assets/minus.svg";
 import noEat from "../../assets/knife.svg";
 import { ResourceContext } from "../../contexts/resource/ResourceContext";
 import Swal from "sweetalert2";
@@ -201,15 +199,14 @@ function MealCard(props: MealCardProps) {
                     التسجيل
                   </div>
                 )}
-                {props.meal.reservationStatus != "Empty" &&
-                  props.meal.reservationStatus != "Passed" && (
-                    <div
-                      className="meal-plus-minus-cancel"
-                      onClick={handleCancel}
-                    >
-                      إلغاء الوجبة
-                    </div>
-                  )}
+                {props.meal.reservationStatus == "Reserved" && (
+                  <div
+                    className="meal-plus-minus-cancel"
+                    onClick={handleCancel}
+                  >
+                    إلغاء الوجبة
+                  </div>
+                )}
               </div>
             </div>
           </div>

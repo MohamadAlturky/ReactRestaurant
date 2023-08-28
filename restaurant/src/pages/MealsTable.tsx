@@ -200,7 +200,7 @@ export default function MealsTable() {
           <ReactPaginate
             previousLabel={"السابق"}
             nextLabel={"التالي"}
-            pageCount={data.count / 10}
+            pageCount={data.count / 5}
             onPageChange={({ selected }) => PageChange(selected)}
             containerClassName="d-flex container-for-pagination"
             disabledClassName="disabled-for-pagination"

@@ -113,6 +113,10 @@ box-shadow: -7px 7px 9px 0px rgba(0, 0, 0, 0.10);
     opacity: 0;
 }
 
+.cancel:hover {
+    color: #ffffff;
+}
+
 .smaller {
     font-size: 15px;
 }

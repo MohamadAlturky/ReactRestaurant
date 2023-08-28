@@ -8,4 +8,5 @@ interface AccountTransaction {
   value: number;
   createdAtDay: string;
   date: string;
+  by:string
 }
