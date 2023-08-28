@@ -5,13 +5,12 @@ import "./navbar.css";
 import { useMediaQuery } from "@mui/material";
 import { useContext } from "react";
 import { ResourceContext } from "../../contexts/resource/ResourceContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 interface NavBarProps {
   styles: string;
   backgroundStyle: string;
 }
 function NavBar(props: NavBarProps) {
-  const navigate = useNavigate();
   const resources = useContext(ResourceContext);
   const isSmallScreen = useMediaQuery("(max-width: 360px)");
   let classes =
@@ -45,20 +44,20 @@ function NavBar(props: NavBarProps) {
                     {resources.NavBar.callUs}
                   </a> */}
                 </span>
-                <span className=" item">
-                  <a className="nav-link" href="/">
+                <span className="item">
+                  <Link to={"/CallUs"} className="nav-link">
                     {resources.NavBar.notificationsLink}
-                  </a>
+                  </Link>
                 </span>
-                <span className=" item">
-                  <a className="nav-link" href="/">
+                <span className="item">
+                  <Link to={"/note"} className="nav-link">
                     {resources.NavBar.notesLink}
-                  </a>
+                  </Link>
                 </span>
-                <span className=" item">
-                  <a className="nav-link" href="">
+                <span className="item">
+                  <Link to={"/"} className="nav-link">
                     {resources.NavBar.mainPageLink}
-                  </a>
+                  </Link>
                 </span>
               </div>
               <button
@@ -94,23 +93,19 @@ function NavBar(props: NavBarProps) {
                 </div>
                 <div className="offcanvas-body">
                   <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <a className="nav-link ms-auto" href="/">
+                    <Link to={"/"} className="nav-link ms-auto">
                       {resources.NavBar.mainPageLink}
-                    </a>
-                    <a
-                      className="nav-link ms-auto"
-                      onClick={() => {
-                        navigate("/CallUs");
-                      }}
-                    >
+                    </Link>
+                    <Link to={"/CallUs"} className="nav-link ms-auto">
                       {resources.NavBar.callUs}
-                    </a>
-                    <a className="nav-link ms-auto" href="/">
+                    </Link>
+                    <Link to={"/Notifications"} className="nav-link ms-auto">
                       {resources.NavBar.notificationsLink}
-                    </a>
-                    <a className="nav-link ms-auto" href="/">
+                    </Link>
+                    <Link to={"/Notes"} className="nav-link ms-auto">
                       {resources.NavBar.notesLink}
-                    </a>
+                    </Link>
+                    <a className="nav-link ms-auto" href="/"></a>
                   </ul>
                 </div>
               </div>

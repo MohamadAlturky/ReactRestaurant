@@ -2,3 +2,19 @@
     background-image: url('../images/graphics.jpg') !important;
 
 }
+
+body {
+    overflow-y: scroll !important;
+}
+
+.link-to {
+    cursor: pointer;
+}
+
+.orange {
+    color: #E4801E;
+}
+
+.blue {
+    color: #0d6efd;
+}
