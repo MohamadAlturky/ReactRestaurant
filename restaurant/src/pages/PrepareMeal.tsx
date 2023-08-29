@@ -126,8 +126,10 @@ export default function PrepareMeal() {
       if (date != null) {
         month = date?.month() + 1;
       }
-      let dateToSend = month + "/" + date?.date() + "/" + date?.year();
+      let dateToSend =
+        date?.date() + "/" + month.toString() + "/" + date?.year();
       let token = cookies.jwt;
+      console.log(dateToSend);
 
       context
         .get<Result<MealEntry[]>>(
@@ -163,7 +165,9 @@ export default function PrepareMeal() {
       <>
         {choise && date?.month() && (
           <PrepareMealForm
-            atDay={date?.month() + 1 + "/" + date?.date() + "/" + date?.year()}
+            atDay={
+              date?.date() + "/" + (date?.month() + 1) + "/" + date?.year()
+            }
             choise={choise}
             refresh={JustRefresh}
           />
@@ -283,14 +287,14 @@ export default function PrepareMeal() {
                         {meals?.map((row) => (
                           <StyledTableRow key={row.id}>
                             <StyledTableCell className="d-flex flex-column">
-                              <div
+                              {/* <div
                                 className="cancel btn me-2 scale-smaller"
                                 onClick={() => {
                                   handleConsume(row.id, row.meal.name);
                                 }}
                               >
                                 استهلاك كل الوجبات
-                              </div>
+                              </div> */}
                               <div
                                 className="cancel btn me-2 update-color scale-smaller"
                                 onClick={() => {

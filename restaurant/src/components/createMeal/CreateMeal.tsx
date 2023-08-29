@@ -50,12 +50,22 @@ function CreateMeal() {
           formData,
           "multipart/form-data"
         )
-        .then((response) => {
-          Swal.fire({
-            title: "صح",
-            text: response.status.toString(),
+        .then(() => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
             icon: "success",
-            confirmButtonText: "حسنن",
+            title: "تم",
           });
         });
     } else {

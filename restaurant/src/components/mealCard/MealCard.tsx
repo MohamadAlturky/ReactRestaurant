@@ -15,7 +15,8 @@ interface MealCardProps {
   callBack: (
     mealId: number,
     reservationId: number,
-    reservationStatus: string
+    reservationStatus: string,
+    add: number
   ) => void;
 }
 
@@ -63,13 +64,25 @@ function MealCard(props: MealCardProps) {
                 props.callBack(
                   props.meal?.id,
                   response.data.value.reservationId,
-                  response.data.value.reservationStatus
+                  response.data.value.reservationStatus,
+                  -1
                 );
               }
-              Swal.fire({
-                title: "تمام",
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener("mouseenter", Swal.stopTimer);
+                  toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+              });
+
+              Toast.fire({
                 icon: "success",
-                confirmButtonText: "حسناً",
+                title: "تم",
               });
             })
             .catch((err) => {
@@ -127,7 +140,7 @@ function MealCard(props: MealCardProps) {
             )
             .then((response) => {
               if (props.meal) {
-                props.callBack(props.meal?.id, 0, response.data.value);
+                props.callBack(props.meal?.id, 0, response.data.value, 1);
               }
 
               let newValue = response.data.value.toString();
@@ -135,10 +148,21 @@ function MealCard(props: MealCardProps) {
 
               setReservationStatus(newValue);
               console.log(response);
-              Swal.fire({
-                title: "تمام",
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener("mouseenter", Swal.stopTimer);
+                  toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+              });
+
+              Toast.fire({
                 icon: "success",
-                confirmButtonText: "حسناً",
+                title: "تم",
               });
             })
             .catch((err) => {

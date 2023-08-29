@@ -52,10 +52,22 @@ class ClientContext {
             icon: "info",
             confirmButtonText: "حسناً",
           });
-        } else {
+        } else if (
+          error.response &&
+          error.response.data.error.message != undefined &&
+          error.response.status == 400
+        ) {
           Swal.fire({
             title: "خطأ",
             text: error.response?.data.error.message,
+            icon: "error",
+            confirmButtonText: "حسناً",
+          });
+          return Promise.reject(error);
+        } else {
+          Swal.fire({
+            title: "خطأ",
+            text: "حدثت مشكلة بالخادم حاول لاحقاً",
             icon: "error",
             confirmButtonText: "حسناً",
           });

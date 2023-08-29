@@ -19,7 +19,8 @@ function MealsReservations(props: MealsReservationsProps) {
   const callBack = (
     mealId: number,
     reservationId: number,
-    reservationStatus: string
+    reservationStatus: string,
+    add: number
   ) => {
     let meal = daily.meals.find((item) => item.id == mealId);
     if (meal) {
@@ -33,7 +34,7 @@ function MealsReservations(props: MealsReservationsProps) {
         mealId: meal.mealId,
         name: meal.name,
         numberOfCalories: meal.numberOfCalories,
-        preparedCount: meal.preparedCount,
+        preparedCount: meal.preparedCount + add,
         reservationId: reservationId,
         reservationsCount: meal.reservationsCount,
         reservationStatus: reservationStatus,

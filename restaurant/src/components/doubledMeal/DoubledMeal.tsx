@@ -17,7 +17,8 @@ interface DoubledMealProps {
   callBack: (
     mealId: number,
     reservationId: number,
-    reservationStatus: string
+    reservationStatus: string,
+    add: number
   ) => void;
 }
 
@@ -69,14 +70,26 @@ function DoubledMeal(props: DoubledMealProps) {
                 props.callBack(
                   props.leftMeal?.id,
                   response.data.value.reservationId,
-                  response.data.value.reservationStatus
+                  response.data.value.reservationStatus,
+                  -1
                 );
               }
-              // Swal.fire({
-              //   title: "تمام",
-              //   icon: "success",
-              //   confirmButtonText: "حسناً",
-              // });
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener("mouseenter", Swal.stopTimer);
+                  toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+              });
+
+              Toast.fire({
+                icon: "success",
+                title: "تم",
+              });
             })
             .catch((err) => {
               console.log(err);
@@ -133,17 +146,28 @@ function DoubledMeal(props: DoubledMealProps) {
             )
             .then((response) => {
               if (props.leftMeal) {
-                props.callBack(props.leftMeal?.id, 0, response.data.value);
+                props.callBack(props.leftMeal?.id, 0, response.data.value, 1);
               }
 
               let newValue = response.data.value.toString();
               console.log("newValue", newValue);
 
-              // Swal.fire({
-              //   title: "تمام",
-              //   icon: "success",
-              //   confirmButtonText: "حسناً",
-              // });
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener("mouseenter", Swal.stopTimer);
+                  toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+              });
+
+              Toast.fire({
+                icon: "success",
+                title: "تم",
+              });
             })
             .catch((err) => {
               console.log(err);
@@ -201,7 +225,8 @@ function DoubledMeal(props: DoubledMealProps) {
                 props.callBack(
                   props.rightMeal?.id,
                   response.data.value.reservationId,
-                  response.data.value.reservationStatus
+                  response.data.value.reservationStatus,
+                  -1
                 );
               }
               // Swal.fire({
@@ -265,7 +290,7 @@ function DoubledMeal(props: DoubledMealProps) {
             )
             .then((response) => {
               if (props.rightMeal) {
-                props.callBack(props.rightMeal?.id, 0, response.data.value);
+                props.callBack(props.rightMeal?.id, 0, response.data.value, 1);
               }
               // Swal.fire({
               //   title: "تمام",

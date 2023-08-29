@@ -88,12 +88,12 @@ function LogIn() {
         })
         .catch((error: AxiosError<Result<string>>) => {
           console.log(error);
-          Swal.fire({
-            title: "خطأ",
-            text: error.response?.data.error.message,
-            icon: "question",
-            confirmButtonText: "فهمت",
-          });
+          // Swal.fire({
+          //   title: "خطأ",
+          //   text: error.response?.data.error.message,
+          //   icon: "question",
+          //   confirmButtonText: "فهمت",
+          // });
         });
     } else {
       Swal.fire({

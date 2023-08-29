@@ -36,7 +36,15 @@ export default function NotificationIcon() {
   }, []);
 
   return (
-    <div className="notification">
+    <div
+      className="notification"
+      onClick={() => {
+        setNotificationsPage({
+          count: 0,
+          notificationMessages: [],
+        });
+      }}
+    >
       {notificationsPage.count != 0 && (
         <div className="number-of-unread">{notificationsPage.count}</div>
       )}
