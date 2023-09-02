@@ -340,10 +340,12 @@ function DoubledMeal(props: DoubledMealProps) {
   return (
     <>
       <div className="d-flex justify-content-center doubled-meal-container position-relative">
-        {props.rightMeal?.reservationStatus == "Reserved" && (
+        {(props.rightMeal?.reservationStatus == "Reserved" ||
+          props.rightMeal?.reservationStatus == "Consumed") && (
           <div className="left-cover"></div>
         )}
-        {props.leftMeal?.reservationStatus == "Reserved" && (
+        {(props.leftMeal?.reservationStatus == "Reserved" ||
+          props.leftMeal?.reservationStatus == "Consumed") && (
           <div className="right-cover"></div>
         )}
         <div className="d-flex flex-column justify-content-end">

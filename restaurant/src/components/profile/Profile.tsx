@@ -52,15 +52,15 @@ export default function Profile() {
                   {user.hiastMail}
                 </div>
               </div>
-
-              <div className="input-container-on-meal-form mb-4 mt-1">
+              <div className="mb-5"></div>
+              {/* <div className="input-container-on-meal-form mb-4 mt-1">
                 <div className="d-flex justify-content-end claim">
                   معرف الجهاز
                 </div>
                 <div className="d-flex justify-content-end">
                   {user.macAddress}
                 </div>
-              </div>
+              </div> */}
 
               <div className="log-title">{"⬅️ "}تسجيل الخروج</div>
               <img

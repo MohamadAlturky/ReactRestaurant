@@ -61,7 +61,7 @@ export default function ConsumeReservations() {
       if (date != null) {
         month = date?.month() + 1;
       }
-      let dateToSend = month + "/" + date?.date() + "/" + date?.year();
+      let dateToSend =  date?.date() + "/"+ month + "/" + date?.year();
       let token = cookies.jwt;
 
       context
