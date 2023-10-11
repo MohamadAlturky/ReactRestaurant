@@ -109,11 +109,7 @@ export default function AccountTransactionsPage() {
                     <StyledTableRow key={ind}>
                       {/* <StyledTableCell align="center">{row.by}</StyledTableCell> */}
                       <StyledTableCell align="center">
-                        {resources.Days.find(
-                          (day) => day.id == row.createdAtDay
-                        )?.name +
-                          " " +
-                          row.date}
+                        {row.createdAtDay + " " + row.date}
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {row.value}

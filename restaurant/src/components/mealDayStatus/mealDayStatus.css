@@ -21,21 +21,23 @@
 .no-meal-found {
     background: #B9CF8F;
     width: 70%;
-    height: 40px;
+    min-height: 100%;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: black;
     opacity: 0.5;
+    padding: 3px;
 }
 
 .meal-found-here {
     min-width: 100%;
-    height: 40px;
+    min-height: 100%;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    padding: 3px;
 }

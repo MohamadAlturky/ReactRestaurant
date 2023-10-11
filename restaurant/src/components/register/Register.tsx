@@ -53,6 +53,9 @@ function Register() {
   ) => {
     setDescription(event.target.value);
   };
+  function hasNumber(str: string): boolean {
+    return /\d/.test(str);
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -60,6 +63,13 @@ function Register() {
       Swal.fire({
         title: "خطأ",
         text: "(@hiast.edu.sy) بريد المعهد غير صالح يجب أن ينتهي ب",
+        icon: "error",
+        confirmButtonText: "فهمت",
+      });
+    } else if (hasNumber(firstName) || hasNumber(lastName)) {
+      Swal.fire({
+        title: "خطأ",
+        text: " لا يمكن للاسم أن يحتوي على أرقام",
         icon: "error",
         confirmButtonText: "فهمت",
       });

@@ -1,6 +1,6 @@
 import "./doubledMeal.css";
 import serverUrl from "../../configurations/apiConfiguration.json";
-import noEat from "../../assets/no-eat.svg";
+import noEat from "../../assets/cooking-svgrepo-com.svg";
 import { ResourceContext } from "../../contexts/resource/ResourceContext";
 import { useContext, useEffect, useState } from "react";
 import { OutletContextType } from "../../authentication/models/OutletContextType";
@@ -57,6 +57,7 @@ function DoubledMeal(props: DoubledMealProps) {
           let formData = new FormData();
           if (props.leftMeal)
             formData.append("orderedMealId", props.leftMeal?.id.toString());
+          Swal.showLoading();
 
           clientContext
             .post<Result<CreateReservationResponse>>(
@@ -136,6 +137,7 @@ function DoubledMeal(props: DoubledMealProps) {
               props.leftMeal.reservationId.toString()
             );
           }
+          Swal.showLoading();
 
           clientContext
             .post<Result<string>>(

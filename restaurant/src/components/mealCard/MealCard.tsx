@@ -1,7 +1,7 @@
 import serverUrl from "../../configurations/apiConfiguration.json";
 import "./mealCard.css";
 import { useContext, useEffect, useState } from "react";
-import noEat from "../../assets/knife.svg";
+import noEat from "../../assets/porridge-svgrepo-com.svg";
 import { ResourceContext } from "../../contexts/resource/ResourceContext";
 import Swal from "sweetalert2";
 import { OutletContextType } from "../../authentication/models/OutletContextType";
@@ -9,6 +9,7 @@ import { useOutletContext } from "react-router-dom";
 import ClientContext from "../../contexts/api/ClientContext";
 import { useCookies } from "react-cookie";
 import Result from "../../models/Result";
+import Loader from "../loader/Loader";
 interface MealCardProps {
   meal: MealReadModel | undefined;
   type: string;
@@ -23,7 +24,7 @@ interface MealCardProps {
 function MealCard(props: MealCardProps) {
   const resources = useContext(ResourceContext);
   const [reservationStatus, setReservationStatus] = useState<string>("Empty");
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { outLetProps } = useOutletContext<OutletContextType>();
   const [cookies] = useCookies(["jwt"]);
   const clientContext = new ClientContext(outLetProps.error401Handler);
@@ -46,7 +47,7 @@ function MealCard(props: MealCardProps) {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           // Swal.fire("Saved!", "", "success");
-
+          setIsLoading(true);
           let token = cookies.jwt;
           let formData = new FormData();
           if (props.meal)
@@ -60,6 +61,7 @@ function MealCard(props: MealCardProps) {
               "multipart/form-data"
             )
             .then((response) => {
+              setIsLoading(false);
               if (props.meal) {
                 props.callBack(
                   props.meal?.id,
@@ -86,6 +88,7 @@ function MealCard(props: MealCardProps) {
               });
             })
             .catch((err) => {
+              setIsLoading(false);
               console.log(err);
             });
         } else if (result.isDenied) {
@@ -187,6 +190,7 @@ function MealCard(props: MealCardProps) {
 
   return (
     <>
+      {isLoading && <Loader />}
       {props.meal !== undefined && (
         <div className=" d-flex flex-column align-items-center justify-content-center position-relative">
           <div className="meal-card">
